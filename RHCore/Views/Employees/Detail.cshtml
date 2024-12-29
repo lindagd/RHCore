@@ -1,0 +1,29 @@
+﻿﻿@using RHCore.ViewModels	
+@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+	<h1>Detalhes do funcionário</h1>
+	<h2>@Model.EmployeeName</h2>
+	<ul>
+		<li><strong>Cargo: </strong>@Model.Role</li>
+		<li><strong>Data de Admissão: </strong>@Model.AdmissionDate</li>
+		<li><strong>Salário: </strong>@Model.Paycheck</li>
+		<li><strong>Status: </strong>@Model.Status</li>
+		
+		@if (Model.VacationStatus == "-") {
+			<li>
+				<strong>Situação das férias: </strong>@Model.VacationStatus
+				<a asp-action="Create" asp-controller="Vacations">Cadastrar férias</a>
+			</li>
+		} else {
+			<li><strong>Situação das férias: </strong>@Model.VacationStatus</li>
+			<li><strong>Início das férias: </strong>@Model.VacationStart</li>
+			<li><strong>Término das férias: </strong>@Model.VacationEnd</li>
+		}
+	</ul>
+	<a asp-controller="Home" asp-action="Index">Voltar</a>
+</div>

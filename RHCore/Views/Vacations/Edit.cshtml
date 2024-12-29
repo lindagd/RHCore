@@ -1,0 +1,34 @@
+﻿@model Vacation
+@{
+	ViewData["Title"] = "Editar Férias";
+}
+
+<h1>Editar Férias</h1>
+
+<form asp-action="Edit" method="post">
+	<div>
+		<label for="EmployeeId">Funcionário</label>
+		<select asp-for="EmployeeId" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))">
+			<option value="">Selecione um funcionário ativo</option>
+		</select>
+	</div>
+	<div>
+		<label for="StartingDate">Data de Início</label>
+		<input type="date" id="StartingDate" name="StartingDate" asp-for="StartingDate" />
+	</div>
+	<div>
+		<label for="EndingDate">Data de Término</label>
+		<input type="date" id="EndingDate" name="EndingDate" asp-for="EndingDate" />
+	</div>
+	<div>
+		<label for="VacationStatus">Status</label>
+		<select asp-for="VacationStatus">
+			@foreach (var status in ViewBag.VacationStatus)
+			{
+				<option value="@status.Value">@status.Text</option>
+			}
+		</select>
+	</div>
+	<button type="submit">Salvar</button>
+	<a asp-action="Index">Cancelar</a>
+</form>

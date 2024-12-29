@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Gerar Relatório";
+}
+
+<div class="report-container">
+    <h1>Gerar relatório de Funcionários</h1>
+    <div class="option-section">
+        <a class="btn-download" asp-action="GeneratePdf">Baixar Relatório (PDF)</a>
+        <button class="btn-print" onclick="printReport()">Imprimir Relatório</button>
+    </div>
+    <a asp-controller="Home" asp-action="Index">Voltar</a>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.css">
+<script>
+    function printReport() {
+        printJS({
+            printable: '@Url.Action("GeneratePdf", "Reports")',
+            type: 'pdf',
+            showModal: true,
+        });
+    }
+</script>

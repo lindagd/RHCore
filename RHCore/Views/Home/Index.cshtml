@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem vindo ao RH.Core</h1>
+    <div>
+        @if(!Model.Any()) {
+            <h2>Não existem funcionários cadastrados</h2>
+            <a asp-controller="Employees" asp-action="Create">Cadastrar Funcionário</a>
+        }
+        else {
+            <h2>Funcionários Cadastrados</h2>
+            <p>
+                @if (Model.Count() == 1) {
+                    <span>1 Funcionário cadastrado.</span>
+                } else {
+                    <span>@Model.Count() Funcionários cadastrados.</span>
+                }
+                @if (ViewBag.ActiveEmployeesCount == 1) {
+                    <span>1 ativo.</span>
+                } else {
+                    <span>@ViewBag.ActiveEmployeesCount ativos.</span>
+                }
+
+                Salário médio: @ViewBag.AveragePaycheck.ToString("C")
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="left">Nome</th>
+                        <th class="left">Cargo</th>
+                        <th>Data de Admissão</th>
+                        <th>Salário</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Employee employee in Model)
+                    {
+                        <tr>
+                            <td class="left">@employee.Name</td>
+                            <td class="left">@employee.Role</td>
+                            <td>@employee.AdmissionDate.ToString("dd/MM/yyyy")</td>
+                            <td>@employee.Paycheck.ToString("C")</td>
+                            <td>@if (employee.IsActive)
+                                {
+                                    <span>Ativo</span>
+                                }
+                                else {
+                                    <span>Inativo</span>
+                                }
+                            </td>
+                   
+                            <td class="links">
+                                <a asp-controller="Employees" asp-action="Detail"
+                                   asp-route-id="@employee.Id">Detalhes</a>
+                                <a asp-controller="Employees" asp-action="Edit"
+                                   asp-route-id="@employee.Id">Editar</a>
+                                <a asp-controller="Employees" asp-action="Delete"
+                                   asp-route-id="@employee.Id">Excluir</a>
+                            </td>
+                        </tr>
+				    }
+                </tbody>
+            </table> 
+        }
+        
+    </div>
+</div>

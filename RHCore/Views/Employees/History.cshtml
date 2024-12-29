@@ -1,0 +1,44 @@
+﻿@using RHCore.Helpers
+@using RHCore.ViewModels
+@model IEnumerable<EmployeeHistoryViewModel>
+@{
+	ViewData["Title"] = "Histórico de Alterações";
+}
+
+<div class="text-center">
+    <h1>Histórico de Alterações</h1>
+
+    @if (!Model.Any())
+    {
+        <p>Nenhum registro de alterações encontrado.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Funcionário</th>
+                    <th>Campo Alterado</th>
+                    <th>Valor Antigo</th>
+                    <th>Valor Novo</th>
+                    <th>Alterado Por</th>
+                    <th>Data e Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EmployeeName</td>
+                        <td>@TranslationsHelper.TranslateAttr(@item.ChangedField)</td>
+                        <td>@item.OldValue</td>
+                        <td>@item.NewValue</td>
+                        <td>@item.ChangedBy</td>
+                        <td>@item.ChangedAt</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+    <a asp-controller="Home" asp-action="Index">Voltar</a>
+</div>

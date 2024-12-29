@@ -1,0 +1,39 @@
+﻿@model Employee
+@{
+	ViewData["Title"] = "Cadastrar Funcionário";
+}
+
+<div class="form-container">
+	<h1>Cadastrar Funcionário</h1>
+
+	<form class="inp" asp-action="Create" method="post">
+		<div class="form-group">
+			<label for="Name">Nome</label>
+			<input class="input" type="text" id="Name" name="Name" asp-for="Name" />
+		</div>
+		<div class="form-group">
+			<label for="Role">Cargo</label>
+			<input class="input" type="text" id="Role" name="Role" asp-for="Role" />
+		</div>
+		<div class="form-group">
+			<label for="AdmissionDate">Data de Admissão</label>
+			<input class="input" type="date" id="AdmissionDate" name="AdmissionDate" asp-for="AdmissionDate" />
+		</div>
+		<div class="form-group">
+			<label for="Paycheck">Salário</label>
+			<input class="input" type="number" step="0.01" id="Paycheck" name="Paycheck" asp-for="Paycheck" />
+		</div>
+		<div class="form-group">
+			<label for="IsActive">Status</label>
+			<select class="input" id="IsActive" name="IsActive" asp-for="IsActive">
+				<option value="true">Ativo</option>
+				<option value="false">Inativo</option>
+			</select>
+			<span asp-validation-for="IsActive" class="text-danger"></span>
+		</div>
+		<div>
+			<button class="btn-submit" type="submit">Salvar</button>
+			<a class="btn-cancel" asp-controller="Home" asp-action="Index">Cancelar</a>
+		</div>
+	</form>
+</div>

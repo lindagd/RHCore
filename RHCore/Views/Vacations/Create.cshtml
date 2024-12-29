@@ -1,0 +1,39 @@
+﻿@using RHCore.Data.Enum;
+@model Vacation
+@{
+	ViewData["Title"] = "Cadastrar Férias";
+}
+
+<div class="form-container">
+	<h1>Cadastrar Férias</h1>
+
+	<form class="inp" asp-action="Create" method="post">
+		<div class="form-group">
+			<label for="EmployeeId">Funcionário</label>
+			<select class="input" asp-for="EmployeeId" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))">
+				<option value="">Selecione um funcionário ativo</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="StartingDate">Data de Início</label>
+			<input class="input" type="date" id="StartingDate" name="StartingDate" asp-for="StartingDate" />
+		</div>
+		<div class="form-group">
+			<label for="EndingDate">Data de Término</label>
+			<input class="input" type="date" id="EndingDate" name="EndingDate" asp-for="EndingDate" />
+		</div>
+		<div class="form-group">
+			<label for="VacationStatus">Status</label>
+			<select class="input" asp-for="VacationStatus">
+				@foreach (var status in ViewBag.VacationStatus)
+				{
+					<option value="@status.Value">@status.Text</option>
+				}
+			</select>
+		</div>
+		<div>
+			<button class="btn-submit" type="submit">Salvar</button>
+			<a class="btn-cancel" asp-action="Index">Cancelar</a>
+		</div>
+	</form>
+</div>

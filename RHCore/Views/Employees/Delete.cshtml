@@ -1,0 +1,40 @@
+﻿@model Employee
+
+@{
+	ViewData["Title"] = "Excluir Funcionário";
+}
+
+<h1>Tem certeza que deseja excluir este funcionário?</h1>
+
+<form action="Delete" method="post">
+	<input type="hidden" asp-for="Id" />
+	<input type="submit" value="Confirmar" />
+	<a asp-controller="Home" asp-action="Index">Cancelar</a>
+</form>
+
+<form asp-action="Delete" method="Delete">
+	<div>
+		<label for="Name">Nome</label>
+		<input type="text" id="Name" name="Name" asp-for="Name" />
+	</div>
+	<div>
+		<label for="Role">Cargo</label>
+		<input type="text" id="Role" name="Role" asp-for="Role" />
+	</div>
+	<div>
+		<label for="AdmissionDate">Data de Admissão</label>
+		<input type="date" id="AdmissionDate" name="AdmissionDate" asp-for="AdmissionDate" />
+	</div>
+	<div>
+		<label for="Paycheck">Salário</label>
+		<input type="number" step="0.01" id="Paycheck" name="Paycheck" asp-for="Paycheck" />
+	</div>
+	<div>
+		<label for="IsActive">Status</label>
+		<select id="IsActive" name="IsActive" asp-for="IsActive">
+			<option value="true">Ativo</option>
+			<option value="false">Inativo</option>
+		</select>
+		<span asp-validation-for="IsActive" class="text-danger"></span>
+	</div>
+</form>

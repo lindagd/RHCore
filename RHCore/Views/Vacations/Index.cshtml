@@ -1,0 +1,43 @@
+﻿@using RHCore.Helpers
+@model IEnumerable<Vacation>
+@{
+    ViewData["Title"] = "Férias";
+}
+
+<div class="text-center">
+    <h1>Férias cadastradas</h1>
+    <div>
+        @if(!Model.Any()) {
+            <h3>Não há férias cadastradas</h3>
+            <a asp-action="Create">Cadastrar Férias</a>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Funcionário</th>
+                        <th>Início das férias</th>
+                        <th>Término das férias</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Vacation vacation in Model) 
+                    {
+                        <tr>
+                            <td>@vacation.Employee.Name</td>
+                            <td>@vacation.StartingDate.ToString("dd/MM/yyyy")</td>
+                            <td>@vacation.EndingDate.ToString("dd/MM/yyyy")</td>
+                            <td>@VacationStatusHelper.Translate(vacation.VacationStatus)</td>
+
+                            <td><a asp-action="Edit" asp-route-id="@vacation.Id">Editar</a> </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    <a asp-controller="Home" asp-action="Index">Voltar</a>
+</div>
